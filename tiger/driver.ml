@@ -1,17 +1,16 @@
-structure Parse =
+module Parse =
 struct 
-  fun parse filename =
-      let val file = TextIO.openIn filename
-	  fun get _ = TextIO.input file
-	  val lexer = Mlex.makeLexer get
-	  fun do_it() =
-	      let val t = lexer()
-	       in print t; print "\n";
-		   if substring(t,0,3)="EOF" then () else do_it()
-	      end
-       in do_it();
-	  TextIO.closeIn file
-      end
-
+  let parse filename =
+      let file = open_in filename in
+      let get _ = input_line file in
+      let lexer () = Mlex.makeLexer get in
+      let rec do_it () =
+	let t = lexer () in
+        print_string t;
+        print_string "\n";
+        if (String.sub t 0 3) = "EOF" then () else do_it ()
+      in
+      do_it();
+      close_in file
 end
 
