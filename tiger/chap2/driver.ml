@@ -2,8 +2,8 @@ module Parse =
 struct 
   let parse filename =
       let file = open_in filename in
-      let get _ = input_line file in
-      let lexer () = Mlex.makeLexer get in
+      let lexbuf = Lexing.from_channel in
+      let lexer () = Lexer.tokenize lexbuf in
       let rec do_it () =
 	let t = lexer () in
         print_string t;
