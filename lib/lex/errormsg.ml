@@ -34,7 +34,7 @@ module ErrorMsg : ERRORMSG = struct
           print_string (":" ^ string_of_int n ^ "." ^ string_of_int (pos-a))
         else
           look rest (n-1)
-      | l -> print_string "0.0"
+      | _ -> print_string "0.0"
       in
       anyErrors := true;
       print_string (!fileName);

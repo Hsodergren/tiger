@@ -2,7 +2,7 @@ module Parse =
 struct 
   let parse filename =
       let file = open_in filename in
-      let lexbuf = Lexing.from_channel in
+      let lexbuf = Lexing.from_channel file in
       let lexer () = Lexer.tokenize lexbuf in
       let rec do_it () =
 	let t = lexer () in
@@ -14,3 +14,5 @@ struct
       close_in file
 end
 
+let () =
+  Parse.parse "/home/henrik/programming/ocaml/compiler/lib/testcases/test1.tig"

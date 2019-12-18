@@ -1,5 +1,5 @@
-type linenum (* = int *)
-type token
+type linenum = int
+type token = string
 val _TYPE:  linenum * linenum -> token
 val _VAR:  linenum * linenum -> token
 val _FUNCTION:  linenum * linenum -> token
