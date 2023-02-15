@@ -1,6 +1,9 @@
 (library
- (name lexer))
+ (name lex))
 
 (ocamllex
  (modules lexer)
  (mode standard))
+
+(menhir
+  (modules parser))
