@@ -1,5 +1,7 @@
 (library
- (name lex))
+ (name lex)
+ (libraries fmt)
+ (preprocess (pps ppx_deriving.show)))
 
 (ocamllex
  (modules lexer)

@@ -95,7 +95,7 @@ let _print : tok -> string =
 let parse filename =
   let file = open_in filename in
   let lexbuf = Lexing.from_channel file in
-  let _ =
+  let ast =
     Lex.Parser.main
       (fun buf ->
         let t = Lex.Lexer.tokenize buf in
@@ -103,7 +103,8 @@ let parse filename =
         t)
       lexbuf
   in
-  close_in file
+  close_in file;
+  ast
 
 let () =
   let test_path = "/home/henrik/programming/tiger/testcases/" in
@@ -115,6 +116,7 @@ let () =
       try
         let full_path = test_path ^ "/" ^ file in
         Fmt.pr "%s@." full_path;
-        parse full_path
+        let ast = parse full_path in
+        Fmt.pr "%a@.@." Lex.Ast.pp_exp ast
       with e -> Fmt.pr "%a@." Fmt.exn e)
     arr
